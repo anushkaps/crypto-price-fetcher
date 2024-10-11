@@ -1,35 +1,27 @@
-// routes/cryptoRoutes.js
 const express = require('express');
+const CryptoData = require('../models/CryptoData'); // Adjust the path as necessary
 const router = express.Router();
-const Crypto = require('../models/Crypto');
 
+// Route to get cryptocurrency stats
 router.get('/stats', async (req, res) => {
-  const coin = req.query.coin?.toLowerCase();
-  if (!coin) {
-    return res.status(400).json({ error: 'Coin parameter is required.' });
-  }
-
-  const validCoins = ['bitcoin', 'matic', 'ethereum'];
-  if (!validCoins.includes(coin)) {
-    return res.status(400).json({ error: 'Invalid coin requested. Please use bitcoin, matic, or ethereum.' });
-  }
+  const { coin } = req.query;
 
   try {
-    const cryptoData = await Crypto.findOne({ coin });
+    const cryptoData = await CryptoData.findOne({ name: coin }); // Use name instead of coin
     if (!cryptoData) {
-      return res.status(404).json({ error: 'Coin data not found.' });
+      return res.status(404).json({ error: "Coin data not found." });
     }
 
-    const response = {
-      price: cryptoData.price,
-      marketCap: cryptoData.marketCap,
-      "24hChange": cryptoData.change24h,
-    };
-
-    return res.json(response);
+    // Return data according to the new schema
+    res.json({
+      price: cryptoData.price_usd,           // price in USD
+      marketCap: cryptoData.market_cap_usd,   // market cap in USD
+      "24hChange": cryptoData.change_24h,     // 24h change
+    
+    });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Internal server error.' });
+    res.status(500).json({ error: "Internal server error." });
   }
 });
 

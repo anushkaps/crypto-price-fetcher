@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Check if the model is already defined
 const cryptoDataSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
   price_usd: { type: Number, required: true },
@@ -8,5 +9,7 @@ const cryptoDataSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-const CryptoData = mongoose.model('CryptoData', cryptoDataSchema);
+// Use mongoose.models to check if the model exists
+const CryptoData = mongoose.models.CryptoData || mongoose.model('CryptoData', cryptoDataSchema);
+
 module.exports = CryptoData;

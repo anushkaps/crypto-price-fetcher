@@ -7,7 +7,7 @@ const connectDB = require('../config/db');
 connectDB();
 
 // Background job runs every 2 hours
-cron.schedule('0 */2 * * *', async () => {
+cron.schedule('* * * * *', async () => {
   try {
     const cryptoData = await fetchCryptoData();
     await saveCryptoData(cryptoData);
