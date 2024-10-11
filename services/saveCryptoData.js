@@ -1,20 +1,22 @@
-const CryptoData = require('../models/cryptoData');
+const CryptoData = require('../models/CryptoData');
 
-async function saveCryptoData(cryptoDataArray) {
+async function saveCryptoData(data) {
   try {
-    const savePromises = cryptoDataArray.map(async (cryptoData) => {
-      await CryptoData.updateOne(
-        { name: cryptoData.name },
-        { $set: cryptoData },
-        { upsert: true } // Upsert option to create if not exists
-      );
-    });
+    for (const item of data) {
+      // Create a new entry for each fetched data item
+      const newCryptoData = new CryptoData({
+        name: item.name,
+        price_usd: item.price_usd,
+        market_cap_usd: item.market_cap_usd,
+        change_24h: item.change_24h,
+      });
 
-    await Promise.all(savePromises);
-    console.log('Crypto data saved successfully');
+      // Save the new entry
+      await newCryptoData.save();
+      console.log(`Data for ${item.name} saved successfully.`);
+    }
   } catch (error) {
-    console.error('Error saving crypto data:', error);
-    throw error;
+    console.error(`Error saving crypto data: ${error.message}`);
   }
 }
 

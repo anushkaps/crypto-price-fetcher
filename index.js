@@ -22,7 +22,8 @@ connectDB(); // Connect to the database
   }
 })();
 
-app.use('/api', cryptoRoutes); // Use the routes with a base path (e.g., /api/stats)
+// Use the routes with a base path (e.g., /api/stats and /api/deviation)
+app.use('/api', cryptoRoutes); 
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
