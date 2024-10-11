@@ -36,9 +36,9 @@ The **Crypto Price Fetcher** is a Node.js application that fetches the current p
    npm install
    ```
 
-3. Set up environment variables (create a `.env` file):
+3. Set up environment variables (Create a `.env` file in the root of the project and add your MongoDB URI:):
    ```bash
-   MONGODB_URI=your_mongodb_uri
+   MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.ysrps.mongodb.net/Crypto-API?retryWrites=true&w=majority
    ```
 
 4. Start the application:
@@ -52,9 +52,6 @@ The **Crypto Price Fetcher** is a Node.js application that fetches the current p
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a pull request or open an issue for any enhancements or bugs.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 - [CoinGecko API](https://coingecko.com/en/api) for providing cryptocurrency data.
