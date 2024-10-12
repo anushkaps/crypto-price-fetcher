@@ -9,6 +9,13 @@ The **Crypto Price Fetcher** is a Node.js application that fetches the current p
 - Scheduled background job that runs every two hours.
 - Exposes API endpoints to retrieve cryptocurrency data (coming soon).
 
+## Screenshots
+![image](https://github.com/user-attachments/assets/5fece495-d3e5-4870-bd0d-9bbf68a6fcbf)
+
+![image](https://github.com/user-attachments/assets/f27dc41e-1422-42a9-951d-5a081de6eebe)
+
+
+
 ## Technologies Used
 - **Node.js**: JavaScript runtime for building the application.
 - **Express.js**: Web framework for Node.js (optional if you implement API endpoints).
